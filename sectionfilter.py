@@ -1,8 +1,8 @@
 import pytest
-import filter
+import ts_filter
 import transportpacket
 
-class SectionFilter(filter.Filter)
+class SectionFilter(ts_filter.Filter)
     def __init__(self, pid, table_id):
         self.pid = pid
         self.table_id = table_id

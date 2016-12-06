@@ -1,5 +1,5 @@
 import pytest
-import filter
+import ts_filter
 import transportpacket
 
 STREAM_NAME = 'D:/Stream/Airtel/BizTrip(2016-08)/11640V_32700_20160901_partial.TRP'

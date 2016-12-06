@@ -1,10 +1,10 @@
 import transportpacket
 
-class Filter:
+class TsFilter:
     pass
 
 
-class PidFilter(Filter):
+class PidFilter(TsFilter):
     def __init__(self, pid):
         self.pid = pid
 
