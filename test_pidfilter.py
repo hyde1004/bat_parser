@@ -12,7 +12,7 @@ class TestPidFilter:
     def test_pid_00(self):
         with open(STREAM_NAME, 'rb') as f:
             f.seek(0)
-            data = f.read(188)
+            data = f.read(transportpacket.TP_SIZE)
             packet = transportpacket.TransportPacket(data)
             pid_filter = pidfilter.PidFilter(0x0)
             filtered_packet = pid_filter.do_filter(packet)
