@@ -8,4 +8,7 @@ class SectionFilter(ts_filter.TsFilter):
         self.table_id = table_id
 
     def do_filter(self, packet):
-        pass
+        if self.pid == packet.get_pid() and self.pid == packet.get_pid():
+            return packet
+        else:
+            return None
