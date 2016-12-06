@@ -2,7 +2,7 @@ import pytest
 import ts_filter
 import transportpacket
 
-class SectionFilter(ts_filter.Filter)
+class SectionFilter(ts_filter.TsFilter):
     def __init__(self, pid, table_id):
         self.pid = pid
         self.table_id = table_id
