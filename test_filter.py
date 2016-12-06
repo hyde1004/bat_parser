@@ -11,9 +11,23 @@ class TestPidFilter:
 
     def test_pid_00(self):
         with open(STREAM_NAME, 'rb') as f:
+            f.seek(0)
             data = f.read(188)
             packet = transportpacket.TransportPacket(data)
-            tp = filter.PidFilter(0x0)
-            filtered_packet = tp.do_filter(packet)
-            assert filter_packet.raw[0] == 0x47
-            assert filter_packet.raw[1] == 0x0
+            pidfilter = filter.PidFilter(0x0)
+            filtered_packet = pidfilter.do_filter(packet)
+            assert filtered_packet == None
+
+            f.seek(transportpacket.TP_SIZE*(1614-1))
+            data = f.read(transportpacket.TP_SIZE)
+            packet = transportpacket.TransportPacket(data)
+            pidfilter = filter.PidFilter(0x0)
+            filtered_packet = pidfilter.do_filter(packet)
+            assert filtered_packet.get_pid() == 0
+
+            f.seek(transportpacket.TP_SIZE*(8038-1))
+            data = f.read(transportpacket.TP_SIZE)
+            packet = transportpacket.TransportPacket(data)
+            pidfilter = filter.PidFilter(0x14)
+            filtered_packet = pidfilter.do_filter(packet)
+            assert filtered_packet.get_pid() == 0x14

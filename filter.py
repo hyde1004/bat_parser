@@ -6,7 +6,10 @@ class Filter:
 
 class PidFilter(Filter):
     def __init__(self, pid):
-        pass
+        self.pid = pid
 
-    def do_filter(self, data):
-        pass
+    def do_filter(self, packet):
+        if packet.get_pid() == self.pid:
+            return packet
+        else:
+            return None
