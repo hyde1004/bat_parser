@@ -14,13 +14,13 @@ class TestSectionFilter:
             f.seek(0)
             data = f.read(transportpacket.TP_SIZE)
             packet = transportpacket.TransportPacket(data)
-            pid_filter = sectionfilter.SectionFilter(0x0, 0x0)
-            filtered_packet = pid_filter.do_filter(packet)
+            pat_filter = sectionfilter.SectionFilter(0x0, 0x0)
+            filtered_packet = pat_filter.do_filter(packet)
             assert filtered_packet == None
 
             f.seek(transportpacket.TP_SIZE*(1614-1))
             data = f.read(transportpacket.TP_SIZE)
             packet = transportpacket.TransportPacket(data)
-            pid_filter = sectionfilter.SectionFilter(0x0, 0x0)
-            filtered_packet = pid_filter.do_filter(packet)
+            pat_filter = sectionfilter.SectionFilter(0x0, 0x0)
+            filtered_packet = pat_filter.do_filter(packet)
             assert filtered_packet.get_pid() == 0
