@@ -41,3 +41,14 @@ class TransportPacket:
 
     def get_continuity_count(self):
         return self.raw[3] & 0x0F
+
+    def get_adaptaion_length(self):
+        adaptation_field = self.get_adpation_field_control()
+        if adaptation_field == PAYLOAD_ONLY:
+            adaptation_length = 0
+        elif adaptation_field == ADAPTATION_PAYLOAD:
+            adaptation_length = self.raw[4]
+        return adaptation_length
+
+    def get_payload(self):
+        return self.raw[ 4 + 1 + self.get_adaptaion_length() :]

@@ -94,3 +94,12 @@ class TestTransportPacket:
             data = f.read(transportpacket.TP_SIZE)
             packet = transportpacket.TransportPacket(data)
             assert packet.get_adpation_field_control() == transportpacket.PAYLOAD_ONLY
+
+    def test_payload(self):
+        with open(STREAM_NAME, 'rb') as f:
+            f.seek(transportpacket.TP_SIZE*(1614-1))
+            data = f.read(transportpacket.TP_SIZE)
+            packet = transportpacket.TransportPacket(data)
+            data = packet.get_payload()
+            assert data[0] == 0x0
+            assert data[1] == 0xB0
