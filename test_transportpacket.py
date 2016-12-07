@@ -82,3 +82,15 @@ class TestTransportPacket:
             data = f.read(transportpacket.TP_SIZE)
             packet = transportpacket.TransportPacket(data)
             assert packet.get_continuity_count() == 0xF
+
+    def test_adpation_field(self):
+        with open(STREAM_NAME, 'rb') as f:
+            f.seek(transportpacket.TP_SIZE*(40-1))
+            data = f.read(transportpacket.TP_SIZE)
+            packet = transportpacket.TransportPacket(data)
+            assert packet.get_adpation_field_control() == transportpacket.ADAPTATION_PAYLOAD
+
+            f.seek(transportpacket.TP_SIZE*(1614-1))
+            data = f.read(transportpacket.TP_SIZE)
+            packet = transportpacket.TransportPacket(data)
+            assert packet.get_adpation_field_control() == transportpacket.PAYLOAD_ONLY
